@@ -1,3 +1,7 @@
+# Deployment
+
+App is deployed at: https://immense-plateau-91495.herokuapp.com/
+
 # App Overview
 
 Would you rather is a React app that uses a Redux store to save data on the client side. Container React components connect 
