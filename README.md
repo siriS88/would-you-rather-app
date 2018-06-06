@@ -6,6 +6,8 @@ to the redux store to fetch the required slices of the store and provide necessa
 The allows users to login/register and vote on polls with two given options. Users can add new polls that everyone can then vote on and 
 also look at poll details and percentages. They can view their rank among other users on the Leaderboard and like/dislike polls.
 
+The app's backend includes mock users and questions data from udacity.
+
 # Features Available
 
 * Login as existing user
@@ -23,6 +25,7 @@ percentage of users who voted for an option. It also provides an option to like 
 
 Notes:
 * There is no way for users to change their vote after voting
+* There is no backend server, so refreshing the page will reset changes
 
 # Run the App
 
