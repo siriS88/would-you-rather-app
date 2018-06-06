@@ -51,6 +51,7 @@ const styles = theme => ({
     },
     paper: {
         position: 'relative',
+        padding: '20px',
     }
 });
 
