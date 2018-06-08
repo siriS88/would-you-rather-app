@@ -1,4 +1,4 @@
-import {GET_QUESTIONS, SAVE_ANSWER, ADD_QUESTION, TOGGLE_LIKE} from '../actions/questions';
+import {GET_QUESTIONS, SAVE_ANSWER, ADD_QUESTION, TOGGLE_LIKE, DELETE_QUESTION} from '../actions/questions';
 
 export default function questions(state = [], action) {
     switch (action.type) {
@@ -35,8 +35,14 @@ export default function questions(state = [], action) {
 
             };
 
+        case DELETE_QUESTION:
+            delete state[action.qid];
+            return {
+                ...state
+            };
 
-default:
-    return state
+
+        default:
+            return state
 }
 }

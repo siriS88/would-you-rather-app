@@ -1,5 +1,5 @@
 import {GET_USERS, ADD_USER} from '../actions/users';
-import {SAVE_ANSWER, ADD_QUESTION, TOGGLE_LIKE} from '../actions/questions';
+import {SAVE_ANSWER, ADD_QUESTION, TOGGLE_LIKE, DELETE_QUESTION} from '../actions/questions';
 
 export default function users(state = [], action) {
     switch (action.type) {
@@ -42,8 +42,16 @@ export default function users(state = [], action) {
                         state[action.authedUser].favorites.filter((qid)=>qid!==action.qid)
                         : state[action.authedUser].favorites.concat([action.qid])
                 }
-            }
-
+            };
+        case DELETE_QUESTION:
+            delete state[action.authedUser].answers[action.qid];
+            return {
+                ...state,
+                [action.authedUser]: {
+                    ...state[action.authedUser],
+                    questions: state[action.authedUser].questions.filter((id) => id !== action.qid),
+                    }
+                };
         default:
             return state
     }

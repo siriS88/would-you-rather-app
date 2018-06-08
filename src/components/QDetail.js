@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {handleSaveAnswer, handleToggleLike} from '../actions/questions';
+import {handleSaveAnswer, handleToggleLike, handleDeleteQuestion} from '../actions/questions';
 import Nav from './Nav';
 import { Redirect} from 'react-router-dom';
 import Radio from '@material-ui/core/Radio';
@@ -23,6 +23,7 @@ import TiHeartOutline from 'react-icons/lib/ti/heart-outline';
 import TiHeartFullOutline from 'react-icons/lib/ti/heart-full-outline';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
     root: {
@@ -52,7 +53,12 @@ const styles = theme => ({
     paper: {
         position: 'relative',
         padding: '20px',
-    }
+    },
+    button: {
+        position: 'absolute',
+        right: '70px',
+        bottom: '10px',
+    },
 });
 
 // This component will get id of question from url params
@@ -84,7 +90,7 @@ class QDetail extends Component {
             qid: question.id,
             answer: optionOne === true ? 'optionOne' : 'optionTwo'
         }).then((res)=>{
-            //redirect to this poll detail page again - now the poll detail shows up as answered
+            //redirect to home page - now the poll detail shows up as answered
             this.setState({
                 toHome:true
             });
@@ -96,7 +102,26 @@ class QDetail extends Component {
         this.props.handleToggleLike({authedUser, qid: question.id});
     };
 
+    handleDelete = () => {
+        const {authedUser, question} = this.props;
+
+        this.props.handleDelete({authedUser, qid: question.id})
+            .then(()=>{
+                // redirect to home, this poll should be deleted now.
+
+            })
+        this.setState({
+            toHome:true
+        });
+
+    };
+
     render() {
+
+        if (this.state.toHome === true) {
+            return <Redirect to='/home'/>
+        }
+
         const {question, users, authedUser} = this.props;
 
         let optionOnePercentage = 0;
@@ -109,10 +134,6 @@ class QDetail extends Component {
         }
         if (question === null) { //if question is not found, redirect to a 404 page
             return <Redirect to='/404'/>
-        }
-
-        if (this.state.toHome === true) {
-            return <Redirect to='/home'/>
         }
 
         const heart = question.likes.includes(authedUser) ?  <TiHeartFullOutline/> : <TiHeartOutline/>;
@@ -198,6 +219,12 @@ class QDetail extends Component {
                             {question.likes.length}
                         </Typography>
                     </div>
+                    <IconButton className={classes.button}
+                                disabled={question.author!==authedUser}
+                                aria-label="Delete"
+                                onClick={this.handleDelete}>
+                        <DeleteIcon />
+                    </IconButton>
                 </Paper>
             </div>
         );
@@ -213,6 +240,7 @@ function mapDispatchToProps(dispatch) {
     return {
         handleSaveAnswer: (obj)=>dispatch(handleSaveAnswer(obj)),
         handleToggleLike: (obj)=>dispatch(handleToggleLike(obj)),
+        handleDelete: (obj)=>dispatch(handleDeleteQuestion(obj)),
     }
 }
 

@@ -261,3 +261,26 @@ export function _saveToggleLike({authedUser, qid}) {
         },500)
     });
 }
+
+export function _saveDeleteQuestion({authedUser, qid}) {
+    return new Promise((res,rej) => {
+      setTimeout(()=>{
+          const res_delete_q = delete questions.qid;
+          let res_delete_ans = true;
+          if (users[authedUser].answers.hasOwnProperty(qid)) {
+              res_delete_ans = delete users[authedUser].answers[qid];
+          }
+
+          users = {
+              ...users,
+              authedUser: {
+                  ...users[authedUser],
+                  questions: users[authedUser].questions.filter((id)=>id!==qid)
+              }
+          };
+
+          res(res_delete_q&&res_delete_ans)
+      }, 500)
+    })
+
+}

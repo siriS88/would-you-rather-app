@@ -1,10 +1,13 @@
-import {_getQuestions, _saveQuestionAnswer, _saveQuestion, _saveToggleLike} from '../utils/_DATA.js';
+import {_getQuestions, _saveQuestionAnswer, _saveQuestion,
+    _saveToggleLike, _saveDeleteQuestion} from '../utils/_DATA.js';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SAVE_ANSWER = 'SAVE_ANSWER';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const TOGGLE_LIKE = 'TOGGLE_LIKE';
+export const DELETE_QUESTION = 'DELETE_QUESTION';
+
 
 export function getAllQuestions(questions) {
     return {
@@ -35,6 +38,14 @@ function toggleLike(authedUser, qid) {
         type: TOGGLE_LIKE,
         authedUser,
         qid
+    }
+}
+
+function handleDelete(authedUser, qid) {
+    return {
+        type: DELETE_QUESTION,
+        authedUser,
+        qid,
     }
 }
 
@@ -88,4 +99,17 @@ export function handleToggleLike({authedUser, qid}) {
             })
 
     }
+}
+
+export function handleDeleteQuestion({authedUser, qid}) {
+    return (dispatch) => {
+        dispatch(showLoading());
+        return _saveDeleteQuestion({authedUser, qid})
+            .then((res)=>{
+                console.log(res)
+            dispatch(handleDelete(authedUser, qid));
+            dispatch(hideLoading());
+        })
+    }
+
 }
