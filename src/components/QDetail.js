@@ -108,12 +108,10 @@ class QDetail extends Component {
         this.props.handleDelete({authedUser, qid: question.id})
             .then(()=>{
                 // redirect to home, this poll should be deleted now.
-
+                this.setState({
+                    toHome:true
+                });
             })
-        this.setState({
-            toHome:true
-        });
-
     };
 
     render() {
