@@ -103,12 +103,10 @@ export function handleToggleLike({authedUser, qid}) {
 
 export function handleDeleteQuestion({authedUser, qid}) {
     return (dispatch) => {
-        dispatch(showLoading());
         return _saveDeleteQuestion({authedUser, qid})
             .then((res)=>{
                 console.log(res)
             dispatch(handleDelete(authedUser, qid));
-            dispatch(hideLoading());
         })
     }
 

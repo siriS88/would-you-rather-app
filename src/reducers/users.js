@@ -44,12 +44,21 @@ export default function users(state = [], action) {
                 }
             };
         case DELETE_QUESTION:
-            delete state[action.authedUser].answers[action.qid];
+            // Do not modify the redux state directly. It is immutable because redux does shallow
+            // checking with root state object to check if state changed. If you directly modify
+            // state, then shallow checking (checking object reference) might return false as the
+            // object references are the same
+
+            // Always create a new object from state to a new variable using Object.assign and
+            // modify that and return it or use the spread operator to make the needed changes and
+            // return a new object
+            const users = Object.assign({}, state)
+            delete users[action.authedUser].answers[action.qid];
             return {
-                ...state,
+                ...users,
                 [action.authedUser]: {
-                    ...state[action.authedUser],
-                    questions: state[action.authedUser].questions.filter((id) => id !== action.qid),
+                    ...users[action.authedUser],
+                    questions: users[action.authedUser].questions.filter((id) => id !== action.qid),
                     }
                 };
         default:

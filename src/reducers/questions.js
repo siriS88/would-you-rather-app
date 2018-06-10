@@ -36,9 +36,18 @@ export default function questions(state = [], action) {
             };
 
         case DELETE_QUESTION:
-            delete state[action.qid];
+            // Do not modify the redux state directly. It is immutable because redux does shallow
+            // checking with root state object to check if state changed. If you directly modify
+            // state, then shallow checking (checking object reference) might return false as the
+            // object references are the same
+
+            // Always create a new object from state to a new variable using Object.assign and
+            // modify that and return it or use the spread operator to make the needed changes and
+            // return a new object
+            const questions = Object.assign({}, state);
+            delete questions[action.qid];
             return {
-                ...state
+                ...questions
             };
 
 
