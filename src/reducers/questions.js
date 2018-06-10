@@ -1,12 +1,12 @@
 import {GET_QUESTIONS, SAVE_ANSWER, ADD_QUESTION, TOGGLE_LIKE, DELETE_QUESTION} from '../actions/questions';
+import merge from 'lodash/merge';
 
 export default function questions(state = [], action) {
     switch (action.type) {
         case GET_QUESTIONS:
-            return {
-                ...state,
-                ...action.questions
-            };
+            // because ... operator performs a shallow copy and so if the state has
+            // more info (loaded from localStorage) that is nested inside in a user that action.users does not, it is overridden and lost
+            return merge(state, action.questions);
         case SAVE_ANSWER:
             return {
                 ...state,

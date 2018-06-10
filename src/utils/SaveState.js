@@ -16,8 +16,9 @@ class SaveState {
     };
 
     saveState = (state) => {
+        const reqState = Object.assign({}, {authedUser: state.authedUser}, {users: state.users}, {questions: state.questions}); // don't save loading bar state
         try {
-            const serializedState = JSON.stringify(state);
+            const serializedState = JSON.stringify(reqState);
             localStorage.setItem('wouldYouRatherState', serializedState);
 
         } catch (err) {

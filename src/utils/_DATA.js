@@ -1,3 +1,9 @@
+// As modules in js are singletons and are only executed once (when loaded), users and  questions are part of the module cache
+// and if any of the functions that change these variables, all other variables will be operating on the changed data, since
+// these variables are global in this scope and are part of the same one reference in the same process. When page is refereshed
+// and app is reloaded, module code is executed again and changes to these variables are reset. So, use database to persist changes
+// across refreshes. This kind of module caching only works if we continue in the same process.
+// (https://stackoverflow.com/questions/25416871/nodejs-persistent-variable)
 let users = {
     sarahedo: {
         id: 'sarahedo',
