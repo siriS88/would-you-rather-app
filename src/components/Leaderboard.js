@@ -11,6 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 import classNames from 'classnames';
+import {sortUsers} from '../selectors';
 
 const styles = theme => ({
     root: {
@@ -101,14 +102,10 @@ class Leaderboard extends Component {
     }
 }
 
-function mapStateToProps({users, authedUser}) {
-    const userValues=Object.values(users);
+function mapStateToProps(state) {
     return {
-        usersList: userValues.sort((a,b)=>
-            ((Object.keys(b.answers).length + b.questions.length)
-                - (Object.keys(a.answers).length + a.questions.length))
-        ),
-        authedUser: authedUser===''? null : authedUser,
+        usersList: sortUsers(state),
+        authedUser: state.authedUser===''? null : state.authedUser,
     }
 }
 

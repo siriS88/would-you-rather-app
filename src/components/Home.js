@@ -8,7 +8,7 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
-
+import { sortQuestions } from '../selectors';
 
 const styles = theme => ({
     root: {
@@ -121,11 +121,10 @@ class Home extends Component {
     }
 }
 
-function mapStateToProps({users, questions, authedUser}) {
-    const currentUser = users[authedUser];
+function mapStateToProps(state) {
+    const currentUser = state.users[state.authedUser];
     return {
-        questions: Object.keys(questions)
-            .sort((a,b)=>questions[b].timestamp-questions[a].timestamp),
+        questions: sortQuestions(state),
         user: currentUser ? currentUser : null,
     }
 }

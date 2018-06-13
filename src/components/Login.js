@@ -12,6 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+import {getUserValues} from '../selectors';
 
 const styles = theme => ({
     root: theme.mixins.gutters({
@@ -119,9 +120,9 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-function mapStateToProps({users}) {
+function mapStateToProps(state) {
     return {
-        users: Object.values(users),
+        users: getUserValues(state),
     }
 }
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(Login))

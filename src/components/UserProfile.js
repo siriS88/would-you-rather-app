@@ -11,6 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
+import {getQuestionIds} from "../selectors";
 
 const styles = theme => ({
     root: {
@@ -153,12 +154,12 @@ class UserProfile extends Component {
     }
 }
 
-function mapStateToProps({users, questions, authedUser}, props) {
+function mapStateToProps(state, props) {
     const {id} = props.match.params;
     return {
-        user: users[id] ? users[id] : null,
-        questions: Object.keys(questions),
-        authedUser,
+        user: state.users[id] ? state.users[id] : null,
+        questions: getQuestionIds(state),
+        authedUser: state.authedUser,
     }
 
 }
