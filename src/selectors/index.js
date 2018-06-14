@@ -14,20 +14,20 @@ const getQuestions = state => state.questions;
 
 const getUsers = state => state.users;
 
-export const sortQuestions = createSelector(getQuestions, (questions)=> {
+export const sortQuestions = createSelector([getQuestions], (questions)=> {
     return Object.keys(questions)
         .sort((a,b)=>questions[b].timestamp-questions[a].timestamp)
 });
 
-export const getQuestionIds = createSelector(getQuestions, (questions) => {
+export const getQuestionIds = createSelector([getQuestions], (questions) => {
    return Object.keys(questions);
 });
 
-export const getUserValues = createSelector(getUsers, (users) => {
+export const getUserValues = createSelector([getUsers], (users) => {
     return Object.values(users);
 });
 
-export const sortUsers = createSelector(getUsers, (users)=> {
+export const sortUsers = createSelector([getUsers], (users)=> {
     const userValues=Object.values(users);
     userValues.sort((a,b)=>
         ((Object.keys(b.answers).length + b.questions.length)
