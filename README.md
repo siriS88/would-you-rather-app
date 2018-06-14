@@ -33,7 +33,7 @@ Notes:
 
 # Run the App
 
-To view the MyReads page:
+To view the Would You Rather App:
 * clone the `react-redux-would-you-rather repo`
 * cd to `would-you-rather`
 * install all project dependencies with `yarn`
