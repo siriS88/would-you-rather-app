@@ -6,7 +6,7 @@ export default function questions(state = [], action) {
         case GET_QUESTIONS:
             // because ... operator performs a shallow copy and so if the state has
             // more info (loaded from localStorage) that is nested inside in a user that action.users does not, it is overridden and lost
-            return merge(state, action.questions);
+            return merge({}, state, action.questions);
         case SAVE_ANSWER:
             return {
                 ...state,

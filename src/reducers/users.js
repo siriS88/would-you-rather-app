@@ -5,7 +5,7 @@ import merge from 'lodash/merge';
 export default function users(state = [], action) {
     switch (action.type) {
         case GET_USERS:
-            return merge(state, action.users); // because ... operator performs a shallow copy and so if the state has
+            return merge({}, state, action.users); // because ... operator performs a shallow copy and so if the state has
             // more info (loaded from localStorage) that is nested inside in a user that action.users does not, it is overridden and lost
         case SAVE_ANSWER:
             return {

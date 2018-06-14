@@ -105,7 +105,6 @@ export function handleDeleteQuestion({authedUser, qid}) {
     return (dispatch) => {
         return _saveDeleteQuestion({authedUser, qid})
             .then((res)=>{
-                console.log(res)
             dispatch(handleDelete(authedUser, qid));
         })
     }
