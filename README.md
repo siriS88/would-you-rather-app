@@ -1,6 +1,5 @@
 # Deployment
 
-App is deployed at: https://immense-plateau-91495.herokuapp.com/
 
 # App Overview
 
