@@ -9,7 +9,7 @@ to the redux store to fetch the required slices of the store and provide necessa
 The allows users to login/register and vote on polls with two given options. Users can add new polls that everyone can then vote on and 
 also look at poll details and percentages. They can view their rank among other users on the Leaderboard and like/dislike polls.
 
-The app's backend includes mock users and questions data from udacity. The app is styled using the Material-UI Library (https://material-ui.com/).
+The app's backend includes mock users and questions data from udacity (https://github.com/udacity/reactnd-project-would-you-rather-starter). The app is styled using the Material-UI Library (https://material-ui.com/).
 
 # Features Available
 
