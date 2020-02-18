@@ -1,4 +1,5 @@
-# Deployment
+# Intro
+This project is developed as part of the Udacity React Nanodegree and uses code provided as part of this program.
 
 
 # App Overview
